@@ -40,7 +40,7 @@ function isEqual(user, target) {
 
 function self(user, id, body, verified) {
     let self = (isEqual(user, id) || isEqual(user, body.user || body.creator)) ?
-        Promise.resolve(true) : clientData.getObject(id).then(obj => isEqual(user, obj.user || body.creator));
+        Promise.resolve(true) : clientData.getObject(id).then(obj => isEqual(user, obj.user || obj.creator));
     return self.then(self => (self && verified) ? clientData.getObject(user).then(user => user.verified) : self);
 }
 
